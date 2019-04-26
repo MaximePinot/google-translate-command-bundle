@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="hello">
+                <source>hello</source>
+                <target>Hello</target>
+            </trans-unit>
+
+            <trans-unit id="welcome">
+                <source>welcome</source>
+                <target>Welcome</target>
+            </trans-unit>
+
+            <trans-unit id="french">
+                <source>french</source>
+                <target>This entry is already translated in messages.fr.xlf and therefore should not be translated by the command.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

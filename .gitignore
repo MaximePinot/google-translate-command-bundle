@@ -1,0 +1,5 @@
+vendor/
+.php_cs.cache
+
+tests/Fixtures/App/var/
+tests/Fixtures/App/translations/google_translated/

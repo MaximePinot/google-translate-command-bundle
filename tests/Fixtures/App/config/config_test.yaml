@@ -1,0 +1,8 @@
+framework:
+  test: ~
+  secret: 8bbp5oVu8S
+  default_locale: 'en'
+  translator:
+    fallback: ['en']
+    paths:
+      - '%kernel.project_dir%/translations'

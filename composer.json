@@ -1,0 +1,49 @@
+{
+  "name": "maximepinot/google-translate-command-bundle",
+  "description": "Automatically translate your Symfony translation files with the Google Translate API.",
+  "type": "symfony-bundle",
+  "keywords": ["symfony", "google", "translate", "translations"],
+  "homepage": "https://github.com/MaximePinot/google-translate-command-bundle",
+  "readme": "https://github.com/MaximePinot/google-translate-command-bundle/blob/master/README.md",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Maxime Pinot",
+      "email": "contact@maximepinot.com",
+      "homepage": "https://www.maximepinot.com/"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/MaximePinot/google-translate-command-bundle/issues",
+    "source": "https://github.com/MaximePinot/google-translate-command-bundle",
+    "docs": "https://github.com/MaximePinot/google-translate-command-bundle/tree/master/docs/index.md"
+  },
+  "require": {
+    "php": "^7.1",
+    "symfony/framework-bundle": "^3.4|^4.1",
+    "symfony/console": "^3.4|^4.1",
+    "symfony/translation": "^3.4|^4.1",
+    "stichoza/google-translate-php": "^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "MaximePinot\\GoogleTranslateCommandBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MaximePinot\\GoogleTranslateCommandBundle\\Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "symfony/phpunit-bridge": "^3.4|^4.1",
+    "friendsofphp/php-cs-fixer": "^2.14",
+    "symfony/yaml": "^4.2"
+  },
+  "extra": {
+    "thanks": {
+      "name": "stichoza/google-translate-php",
+      "url": "https://github.com/Stichoza/google-translate-php"
+    }
+  }
+}

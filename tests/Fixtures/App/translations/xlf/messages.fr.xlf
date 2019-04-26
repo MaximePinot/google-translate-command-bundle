@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="french">
+                <source>french</source>
+                <target>Cette entrée est déjà traduite en français et ne devrait donc pas être traduite par la commande.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
