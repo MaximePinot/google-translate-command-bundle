@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Translation\MessageCatalogueInterface;
 
 /**
  * Tests the 'translation:google-translate' command.
@@ -76,11 +77,13 @@ class GoogleTranslateCommandTest extends KernelTestCase
 
         $commandTester->execute($input);
 
+        $domainSuffix = class_exists(\MessageFormatter::class) ? MessageCatalogueInterface::INTL_DOMAIN_SUFFIX : '';
+
         foreach ($locales as $locale)
         {
             $format = static::$kernel->getProjectDir() . $outputDir . '/%s.' . $locale . '.' . $ext;
-            $messageDomainFile = sprintf($format, 'messages');
-            $formsDomainFile = sprintf($format, 'forms');
+            $messageDomainFile = sprintf($format, 'messages' . $domainSuffix);
+            $formsDomainFile = sprintf($format, 'forms' . $domainSuffix);
 
             // Assert files were created for each domain
             static::assertFileExists($formsDomainFile);
@@ -89,8 +92,8 @@ class GoogleTranslateCommandTest extends KernelTestCase
             $format = static::$kernel->getProjectDir() . $translationDir . '/expected/%s.' . $locale . '.' . $ext;
 
             // Assert files were translated
-            static::assertFileEquals($messageDomainFile, sprintf($format, 'messages'), '', false, true);
-            static::assertFileEquals($formsDomainFile, sprintf($format, 'forms'), '', false, true);
+            static::assertFileEqualsIgnoreEOL($messageDomainFile, sprintf($format, 'messages'));
+            static::assertFileEqualsIgnoreEOL($formsDomainFile, sprintf($format, 'forms'));
         }
     }
 
@@ -182,5 +185,14 @@ class GoogleTranslateCommandTest extends KernelTestCase
         $messageDomainContent = file_get_contents($messageDomainFile);
         $needle = '<target>Cette entrée est déjà traduite en français et ne devrait donc pas être traduite par la commande.</target>';
         static::assertContains($needle, $messageDomainContent);
+    }
+
+    /**
+     * @param string $expected
+     * @param string $actual
+     */
+    private static function assertFileEqualsIgnoreEOL(string $expected, string $actual): void
+    {
+        static::assertEquals(file($expected, FILE_IGNORE_NEW_LINES), file($actual, FILE_IGNORE_NEW_LINES));
     }
 }

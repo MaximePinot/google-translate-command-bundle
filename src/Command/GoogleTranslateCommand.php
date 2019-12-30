@@ -174,5 +174,7 @@ class GoogleTranslateCommand extends Command
                 $writer->write($messageCatalogue, $ext, ['path' => $outputDir]);
             }
         }
+
+        return 0;
     }
 }

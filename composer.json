@@ -20,9 +20,10 @@
   },
   "require": {
     "php": "^7.1",
-    "symfony/framework-bundle": "^3.4|^4.1",
-    "symfony/console": "^3.4|^4.1",
-    "symfony/translation": "^3.4|^4.1",
+    "ext-intl": "*",
+    "symfony/framework-bundle": "^3.4|^4.1|^5.0",
+    "symfony/console": "^3.4|^4.1|^5.0",
+    "symfony/translation": "^3.4|^4.1|^5.0",
     "stichoza/google-translate-php": "^4.0"
   },
   "autoload": {
@@ -36,9 +37,9 @@
     }
   },
   "require-dev": {
-    "symfony/phpunit-bridge": "^3.4|^4.1",
+    "symfony/phpunit-bridge": "^3.4|^4.1|^5.0",
     "friendsofphp/php-cs-fixer": "^2.14",
-    "symfony/yaml": "^4.2"
+    "symfony/yaml": "^4.2|^5.0"
   },
   "extra": {
     "thanks": {
