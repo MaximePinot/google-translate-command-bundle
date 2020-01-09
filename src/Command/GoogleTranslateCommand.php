@@ -118,7 +118,8 @@ class GoogleTranslateCommand extends Command
         $translationsDir = $this->projectDir . ($input->getOption(self::TRANSLATIONS_DIR_OPT) ?? self::DEFAULT_TRANSLATIONS_DIR);
         $translationFiles = (new Finder())->files()->name('*' . $sourceLocale . '*')->in($translationsDir)->depth(0);
 
-        $outputDir = $this->projectDir . ($input->getOption(self::OUTPUT_DIR_OPT) ?? $input->getOption(self::TRANSLATIONS_DIR_OPT));
+        $outputDirOpt = $input->getOption(self::OUTPUT_DIR_OPT);
+        $outputDir = null === $outputDirOpt ? $translationsDir : ($this->projectDir . $outputDirOpt);
 
         /** @var SplFileInfo $translationFile */
         foreach ($translationFiles as $translationFile)
