@@ -125,7 +125,8 @@ class GoogleTranslateCommand extends Command
         foreach ($translationFiles as $translationFile)
         {
             $ext = $translationFile->getExtension();
-            $domain = explode('.', $translationFile->getFilename())[0];
+            // $domain = explode('.', $translationFile->getFilename())[0];
+            $domain = $this->getDomainName( $translationFile->getFilename());
             $fileLoader = FileLoaderFactory::createFromExtension($ext);
             $messages = $fileLoader->load($translationFile->getRealPath(), $sourceLocale, $domain)->all();
 
@@ -178,4 +179,16 @@ class GoogleTranslateCommand extends Command
 
         return 0;
     }
+
+    /**
+     * 
+     */
+    protected function getDomainName(string $fileName): string
+    {
+        // Explode
+        $domain = explode('.', $fileName)[0];
+        // Replace
+        return str_replace(MessageCatalogue::INTL_DOMAIN_SUFFIX, '', $domain);
+    }
+    
 }
