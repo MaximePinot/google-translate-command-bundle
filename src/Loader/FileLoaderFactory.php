@@ -36,8 +36,6 @@ class FileLoaderFactory
      *
      * @param string $ext A file extension
      *
-     * @return LoaderInterface
-     *
      * @throws FileLoaderNotFoundException if no suitable FileLoader found
      */
     public static function createFromExtension(string $ext): LoaderInterface

@@ -36,8 +36,6 @@ final class FileDumperFactory
      *
      * @param string $ext A file extension
      *
-     * @return FileDumper
-     *
      * @throws FileDumperNotFoundException if no suitable FileDumper found
      */
     public static function createFromExtension(string $ext): FileDumper
