@@ -67,9 +67,6 @@ class GoogleTranslateCommand extends Command
 
     /**
      * GoogleTranslateCommand constructor.
-     *
-     * @param string $projectDir
-     * @param string $defaultLocale
      */
     public function __construct(string $projectDir, string $defaultLocale)
     {
@@ -127,7 +124,7 @@ class GoogleTranslateCommand extends Command
             $ext = $translationFile->getExtension();
             $domain = explode('.', $translationFile->getFilename())[0];
             $fileLoader = FileLoaderFactory::createFromExtension($ext);
-            $messages = $fileLoader->load($translationFile->getRealPath(), $sourceLocale, $domain)->all();
+            $messages = $fileLoader->load($translationFile->getRealPath(), $sourceLocale, $domain)->all($domain);
 
             foreach ($targetLocales as $targetLocale)
             {
@@ -147,7 +144,7 @@ class GoogleTranslateCommand extends Command
                 $googleTranslate->setTarget($targetLocale);
 
                 $translatedMessages = [];
-                foreach ($messages[$domain] as $source => $target)
+                foreach ($messages as $source => $target)
                 {
                     if ($messageCatalogue->has($source, $domain))
                     {
