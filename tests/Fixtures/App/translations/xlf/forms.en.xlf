@@ -12,9 +12,9 @@
                 <target>Password</target>
             </trans-unit>
 
-            <trans-unit id="submit">
-                <source>submit</source>
-                <target>Submit</target>
+            <trans-unit id="submit_form">
+                <source>submit_form</source>
+                <target>Submit form</target>
             </trans-unit>
         </body>
     </file>

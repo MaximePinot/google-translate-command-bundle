@@ -58,7 +58,7 @@ class GoogleTranslateCommandTest extends KernelTestCase
      *
      * @dataProvider extensionsProvider
      */
-    public function testCommand(string $ext): void
+    public function testCommand(string $ext, string $domainSuffix = ''): void
     {
         $locales = ['fr', 'es'];
         $outputDir = '/translations/google_translated/' . $ext;
@@ -74,8 +74,6 @@ class GoogleTranslateCommandTest extends KernelTestCase
         ];
 
         $commandTester->execute($input);
-
-        $domainSuffix = self::domainSuffix();
 
         foreach ($locales as $locale)
         {
@@ -95,16 +93,13 @@ class GoogleTranslateCommandTest extends KernelTestCase
         }
     }
 
-    /**
-     * Provdes a list of extensions that can be tested as translation files
-     * were created in Fixtures/App/translations for test purposes.
-     */
     public function extensionsProvider(): array
     {
         return [
             ['csv'],
             // ['xlf'], Removed on purpose as unique ids are generated. Tested in its own function: testXlf().
             ['yaml'],
+            ['yaml', MessageCatalogueInterface::INTL_DOMAIN_SUFFIX],
         ];
     }
 
@@ -125,13 +120,11 @@ class GoogleTranslateCommandTest extends KernelTestCase
         ];
         $commandTester->execute($input);
 
-        $domainSuffix = self::domainSuffix();
-
         foreach ($locales as $locale)
         {
             $format = static::$kernel->getProjectDir() . $outputDir . '/%s.' . $locale . '.xlf';
-            $messageDomainFile = sprintf($format, 'messages' . $domainSuffix);
-            $formsDomainFile = sprintf($format, 'forms' . $domainSuffix);
+            $messageDomainFile = sprintf($format, 'messages');
+            $formsDomainFile = sprintf($format, 'forms');
 
             // Assert files were created for each domain
             static::assertFileExists($messageDomainFile);
@@ -144,18 +137,18 @@ class GoogleTranslateCommandTest extends KernelTestCase
             if ('fr' === $locale)
             {
                 static::assertStringContainsString('<target>Bonjour</target>', $messageDomainContent);
-                static::assertStringContainsString('<target>Bienvenue</target>', $messageDomainContent);
+                static::assertStringContainsString('<target>Au revoir</target>', $messageDomainContent);
 
                 static::assertStringContainsString('<target>Mot de passe</target>', $formsDomainContent);
-                static::assertStringContainsString('<target>Soumettre</target>', $formsDomainContent);
+                static::assertStringContainsString('<target>Soumettre le formulaire</target>', $formsDomainContent);
             }
             else
             {
                 static::assertStringContainsString('<target>Hola</target>', $messageDomainContent);
-                static::assertStringContainsString('<target>Bienvenido</target>', $messageDomainContent);
+                static::assertStringContainsString('<target>Adiós</target>', $messageDomainContent);
 
                 static::assertStringContainsString('<target>Contraseña</target>', $formsDomainContent);
-                static::assertStringContainsString('<target>Enviar</target>', $formsDomainContent);
+                static::assertStringContainsString('<target>Enviar formulario</target>', $formsDomainContent);
             }
         }
     }
@@ -177,7 +170,7 @@ class GoogleTranslateCommandTest extends KernelTestCase
         ];
         $commandTester->execute($input);
 
-        $messageDomainFile = static::$kernel->getProjectDir() . $outputDir . '/messages' . self::domainSuffix() . '.fr.xlf';
+        $messageDomainFile = static::$kernel->getProjectDir() . $outputDir . '/messages.fr.xlf';
         static::assertFileExists($messageDomainFile);
 
         $messageDomainContent = file_get_contents($messageDomainFile);
@@ -187,14 +180,6 @@ class GoogleTranslateCommandTest extends KernelTestCase
 
     private static function assertFileEqualsIgnoreEOL(string $expected, string $actual): void
     {
-        static::assertEquals(file($expected, FILE_IGNORE_NEW_LINES), file($actual, FILE_IGNORE_NEW_LINES));
-    }
-
-    /**
-     * @return string
-     */
-    private static function domainSuffix()
-    {
-        return class_exists(\MessageFormatter::class) ? MessageCatalogueInterface::INTL_DOMAIN_SUFFIX : '';
+        static::assertEquals(file($expected, \FILE_IGNORE_NEW_LINES), file($actual, \FILE_IGNORE_NEW_LINES));
     }
 }

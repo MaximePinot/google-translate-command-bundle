@@ -7,9 +7,9 @@
                 <target>Hello</target>
             </trans-unit>
 
-            <trans-unit id="welcome">
-                <source>welcome</source>
-                <target>Welcome</target>
+            <trans-unit id="goodbye">
+                <source>goodbye</source>
+                <target>Goodbye</target>
             </trans-unit>
 
             <trans-unit id="french">
