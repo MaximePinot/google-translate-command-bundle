@@ -27,6 +27,8 @@ use Symfony\Component\Translation\MessageCatalogueInterface;
  */
 class GoogleTranslateCommandTest extends KernelTestCase
 {
+    private const API_CALL_DELAY = 2;
+
     /**
      * @var GoogleTranslateCommand
      */
@@ -71,7 +73,7 @@ class GoogleTranslateCommandTest extends KernelTestCase
             'locales' => $locales,
             '--translations-dir' => $translationDir,
             '--output' => $outputDir,
-            '--delay' => 5,
+            '--delay' => self::API_CALL_DELAY,
         ];
 
         $commandTester->execute($input);
@@ -118,7 +120,7 @@ class GoogleTranslateCommandTest extends KernelTestCase
             'locales' => $locales,
             '--translations-dir' => '/translations/xlf',
             '--output' => $outputDir,
-            '--delay' => 5,
+            '--delay' => self::API_CALL_DELAY,
         ];
         $commandTester->execute($input);
 
@@ -169,7 +171,7 @@ class GoogleTranslateCommandTest extends KernelTestCase
             'locales' => ['fr'],
             '--translations-dir' => '/translations/xlf',
             '--output' => $outputDir,
-            '--delay' => 5,
+            '--delay' => self::API_CALL_DELAY,
         ];
         $commandTester->execute($input);
 

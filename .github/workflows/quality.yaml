@@ -1,0 +1,20 @@
+name: Quality
+
+on: [push, pull_request]
+
+jobs:
+  php-cs-fixer:
+    name: PHP CS Fixer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          tools: php-cs-fixer, cs2pr
+
+      - name: Run PHP CS Fixer
+        run: php-cs-fixer fix --config=.php_cs -v --dry-run --stop-on-violation --using-cache=no --format=checkstyle | cs2pr
