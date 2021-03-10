@@ -2,6 +2,8 @@
 
 Automatically translate your Symfony translation files with the Google Translate API.
 
+![Tests workflow](https://github.com/MaximePinot/google-translate-command-bundle/actions/workflows/tests.yml/badge.svg)
+
 ## Installation
 
 ```
