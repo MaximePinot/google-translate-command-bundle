@@ -55,15 +55,9 @@ class GoogleTranslateCommand extends Command
      */
     protected static $defaultName = 'translation:google-translate';
 
-    /**
-     * @var string
-     */
-    private $projectDir;
+    private string $projectDir;
 
-    /**
-     * @var string
-     */
-    private $defaultLocale;
+    private string $defaultLocale;
 
     /**
      * GoogleTranslateCommand constructor.
@@ -79,7 +73,7 @@ class GoogleTranslateCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Translates your translation files with Google Translate')
@@ -101,7 +95,7 @@ class GoogleTranslateCommand extends Command
      * @throws \MaximePinot\GoogleTranslateCommandBundle\Exception\FileDumperNotFoundException
      * @throws ErrorException
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $googleTranslate = new GoogleTranslate();
 
