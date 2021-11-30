@@ -39,16 +39,16 @@ class GoogleTranslateCommand extends Command
     /*
      * Arguments and options.
      */
-    const LOCALES_ARG = 'locales';
-    const LOCALE_OPT = 'locale';
-    const OUTPUT_DIR_OPT = 'output';
-    const TRANSLATIONS_DIR_OPT = 'translations-dir';
-    const DELAY_OPT = 'delay';
+    public const LOCALES_ARG = 'locales';
+    public const LOCALE_OPT = 'locale';
+    public const OUTPUT_DIR_OPT = 'output';
+    public const TRANSLATIONS_DIR_OPT = 'translations-dir';
+    public const DELAY_OPT = 'delay';
 
     /*
      * Default values.
      */
-    const DEFAULT_TRANSLATIONS_DIR = '/translations';
+    public const DEFAULT_TRANSLATIONS_DIR = '/translations';
 
     /**
      * @var string The name of the command
