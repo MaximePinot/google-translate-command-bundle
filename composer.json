@@ -19,11 +19,11 @@
     "docs": "https://github.com/MaximePinot/google-translate-command-bundle/tree/master/docs/index.md"
   },
   "require": {
-    "php": "^7.1|^8.0",
+    "php": ">=7.4",
     "ext-intl": "*",
-    "symfony/framework-bundle": "^3.4|^4.1|^5.0",
-    "symfony/console": "^3.4|^4.1|^5.0",
-    "symfony/translation": "^3.4|^4.1|^5.0",
+    "symfony/framework-bundle": "^4.1|^5.0|^6.0",
+    "symfony/console": "^4.1|^5.0|^6.0",
+    "symfony/translation": "^4.1|^5.0|^6.0",
     "stichoza/google-translate-php": "^4.0"
   },
   "autoload": {
@@ -37,9 +37,9 @@
     }
   },
   "require-dev": {
-    "symfony/phpunit-bridge": "^3.4.19|^4.1|^5.0",
+    "symfony/phpunit-bridge": "^4.1|^5.0|^6.0",
     "friendsofphp/php-cs-fixer": "^2.14",
-    "symfony/yaml": "^4.2|^5.0"
+    "symfony/yaml": "^4.2|^5.0|^6.0"
   },
   "extra": {
     "thanks": {
