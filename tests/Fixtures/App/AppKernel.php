@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
-    public function registerBundles()
+    public function registerBundles(): iterable
     {
         return [
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -31,17 +31,17 @@ class AppKernel extends Kernel
         $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yaml');
     }
 
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return __DIR__ . '/var/cache';
     }
 
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return __DIR__ . '/var/log';
     }
 
-    public function getProjectDir()
+    public function getProjectDir(): string
     {
         return __DIR__;
     }

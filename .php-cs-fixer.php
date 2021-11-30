@@ -14,7 +14,7 @@ $finder = PhpCsFixer\Finder::create()
     ->exclude('tests/Fixtures/App/var/cache')
 ;
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRules([
         '@Symfony' => true,
         '@Symfony:risky' => true,
@@ -28,7 +28,9 @@ return PhpCsFixer\Config::create()
         'compact_nullable_typehint' => true,
         'concat_space' => ['spacing' => 'one'],
         'declare_strict_types' => true,
-        'general_phpdoc_annotation_remove' => ['package', 'subpackage'],
+        'general_phpdoc_annotation_remove' => [
+            'annotations' => ['package', 'subpackage'],
+        ],
         'header_comment' => ['header' => $header, 'location' => 'after_open'],
         'mb_str_functions' => true,
         'multiline_comment_opening_closing' => true,
