@@ -4,9 +4,12 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="MaximePinot\GoogleTranslateCommandBundle\Client\GoogleTranslateClientInterface" alias="MaximePinot\GoogleTranslateCommandBundle\Client\GoogleTranslateClient"/>
+
         <service id="MaximePinot\GoogleTranslateCommandBundle\Command\GoogleTranslateCommand">
             <argument>%kernel.project_dir%</argument>
             <argument>%kernel.default_locale%</argument>
+            <argument type="service" id="MaximePinot\GoogleTranslateCommandBundle\Client\GoogleTranslateClientInterface"/>
 
             <tag name="console.command"/>
         </service>

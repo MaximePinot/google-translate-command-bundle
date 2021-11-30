@@ -1,0 +1,3 @@
+services:
+  MaximePinot\GoogleTranslateCommandBundle\Tests\Fixtures\App\GoogleTranslateClient: ~
+  MaximePinot\GoogleTranslateCommandBundle\Client\GoogleTranslateClientInterface: '@MaximePinot\GoogleTranslateCommandBundle\Tests\Fixtures\App\GoogleTranslateClient'

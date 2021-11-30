@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace MaximePinot\GoogleTranslateCommandBundle\Command;
 
 use ErrorException;
+use MaximePinot\GoogleTranslateCommandBundle\Client\GoogleTranslateClientInterface;
 use MaximePinot\GoogleTranslateCommandBundle\Dumper\FileDumperFactory;
 use MaximePinot\GoogleTranslateCommandBundle\Loader\FileLoaderFactory;
-use Stichoza\GoogleTranslate\GoogleTranslate;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -56,18 +56,16 @@ class GoogleTranslateCommand extends Command
     protected static $defaultName = 'translation:google-translate';
 
     private string $projectDir;
-
     private string $defaultLocale;
+    private GoogleTranslateClientInterface $googleTranslate;
 
-    /**
-     * GoogleTranslateCommand constructor.
-     */
-    public function __construct(string $projectDir, string $defaultLocale)
+    public function __construct(string $projectDir, string $defaultLocale, GoogleTranslateClientInterface $googleTranslate)
     {
         parent::__construct();
 
         $this->projectDir = $projectDir;
         $this->defaultLocale = $defaultLocale;
+        $this->googleTranslate = $googleTranslate;
     }
 
     /**
@@ -97,12 +95,10 @@ class GoogleTranslateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $googleTranslate = new GoogleTranslate();
-
         $sleepDelay = (int) $input->getOption(self::DELAY_OPT);
 
         $sourceLocale = $input->getOption(self::LOCALE_OPT) ?? $this->defaultLocale;
-        $googleTranslate->setSource($sourceLocale);
+        $this->googleTranslate->setSource($sourceLocale);
 
         $targetLocales = $input->getArgument(self::LOCALES_ARG);
 
@@ -135,7 +131,7 @@ class GoogleTranslateCommand extends Command
 
                 $output->writeln(sprintf('Translating "%s" from "%s" to "%s".', $translationFile->getFilename(), $sourceLocale, $targetLocale));
 
-                $googleTranslate->setTarget($targetLocale);
+                $this->googleTranslate->setTarget($targetLocale);
 
                 $translatedMessages = [];
                 foreach ($messages as $source => $target)
@@ -151,7 +147,7 @@ class GoogleTranslateCommand extends Command
                     }
 
                     sleep($sleepDelay);
-                    $translatedMessages[$source] = $googleTranslate->translate($target) ?? $target;
+                    $translatedMessages[$source] = $this->googleTranslate->translate($target) ?? $target;
 
                     if ($output->isVerbose())
                     {
