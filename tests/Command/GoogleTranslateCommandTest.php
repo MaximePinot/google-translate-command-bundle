@@ -91,8 +91,8 @@ class GoogleTranslateCommandTest extends KernelTestCase
             $format = static::$kernel->getProjectDir() . $translationDir . '/expected/%s.' . $locale . '.' . $ext;
 
             // Assert files were translated
-            static::assertFileEqualsIgnoreEOL($messageDomainFile, sprintf($format, 'messages'));
-            static::assertFileEqualsIgnoreEOL($formsDomainFile, sprintf($format, 'forms'));
+            static::assertFileEqualsIgnoreEOL(sprintf($format, 'messages'), $messageDomainFile);
+            static::assertFileEqualsIgnoreEOL(sprintf($format, 'forms'), $formsDomainFile);
         }
     }
 
@@ -143,16 +143,16 @@ class GoogleTranslateCommandTest extends KernelTestCase
                 static::assertStringContainsString('<target>Bonjour</target>', $messageDomainContent);
                 static::assertStringContainsString('<target>Au revoir</target>', $messageDomainContent);
 
+                static::assertStringContainsString('<target>Nom d\'utilisateur</target>', $formsDomainContent);
                 static::assertStringContainsString('<target>Mot de passe</target>', $formsDomainContent);
-                static::assertStringContainsString('<target>Soumettre le formulaire</target>', $formsDomainContent);
             }
             else
             {
                 static::assertStringContainsString('<target>Hola</target>', $messageDomainContent);
                 static::assertStringContainsString('<target>Adiós</target>', $messageDomainContent);
 
+                static::assertStringContainsString('<target>Nombre de usuario</target>', $formsDomainContent);
                 static::assertStringContainsString('<target>Contraseña</target>', $formsDomainContent);
-                static::assertStringContainsString('<target>Enviar formulario</target>', $formsDomainContent);
             }
         }
     }
